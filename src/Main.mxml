@@ -1,18 +1,18 @@
 <?xml version="1.0"?>
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
-               xmlns:view="com.alix.view.*" initialize="onInitialize()">
-    <view:GalleryView width="100%" height="100%" />
+               xmlns:context="com.alix.context.*" xmlns:view="com.alix.view.*" addedToStage="addedToStage()">
+    <view:ApplicationView width="100%" height="100%" />
+    <fx:Declarations>
+        <context:ApplicationContext contextView="{this}" />
+    </fx:Declarations>
     <fx:Script><![CDATA[
-        import com.alix.context.ApplicationContext;
 
-        var context:ApplicationContext;
-
-        private function onInitialize():void
+        private function addedToStage():void
         {
-            trace("start");
+            trace("addedToStage");
 
-            context = new ApplicationContext();
-            context.contextView = this;
+            //stub to hide right-click menu
+            stage.addEventListener(MouseEvent.RIGHT_CLICK, function (e:MouseEvent) { });
         }
         ]]></fx:Script>
 </s:Application>
