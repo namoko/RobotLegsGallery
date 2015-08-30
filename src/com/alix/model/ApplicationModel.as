@@ -11,5 +11,8 @@ public class ApplicationModel extends Actor
 
     // images names stored in server config
     public var imageList : Vector.<String> = new <String>[];
+
+    // last requested image url
+    public var imageUrl : String;
 }
 }

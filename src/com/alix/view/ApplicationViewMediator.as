@@ -62,7 +62,7 @@ public class ApplicationViewMediator extends Mediator
         view.status.visible = false;
 
         view.gallery.visible = true;
-        view.gallery.init();
+        view.gallery.createImages(model.imageList);
     }
 
 }

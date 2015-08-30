@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <mx:Canvas xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:mx="library://ns.adobe.com/flex/mx"
            xmlns:view="com.alix.view.*">
-  <view:GalleryView id="gallery" />
+  <view:GalleryView id="gallery" width="100%" height="100%" verticalScrollPolicy="on" horizontalScrollPolicy="off" />
   <view:StatusView id="status" />
 </mx:Canvas>

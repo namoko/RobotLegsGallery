@@ -22,7 +22,7 @@ public class StartupCommand extends Command
         model.state = ApplicationState.LOADING_IMAGE_LIST;
         dispatch(new ApplicationEvent(ApplicationEvent.STATE_CHANGED));
 
-        service.loadImageList();
+        service.getImageList();
     }
 }
 }

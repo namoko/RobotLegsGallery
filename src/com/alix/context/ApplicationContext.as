@@ -1,10 +1,12 @@
 package com.alix.context
 {
 import com.alix.command.ImagesLoadedCommand;
+import com.alix.command.LoadImageCommand;
 import com.alix.command.StartupCommand;
 import com.alix.event.ApplicationEvent;
 import com.alix.event.ImageLoadEvent;
 import com.alix.model.ApplicationModel;
+import com.alix.service.GoogleImageLoadService;
 import com.alix.service.IImageLoadService;
 import com.alix.service.LocalImageLoadService;
 import com.alix.view.ApplicationView;
@@ -20,18 +22,18 @@ public class ApplicationContext extends Context
 {
     override public function startup() : void
     {
-        trace ("Context startup");
-
         //init
         mediatorMap.mapView(GalleryView, GalleryViewMediator);
         mediatorMap.mapView(StatusView, StatusViewMediator);
         mediatorMap.mapView(ApplicationView, ApplicationViewMediator);
 
         injector.mapSingleton(ApplicationModel);
-        injector.mapSingletonOf(IImageLoadService, LocalImageLoadService);
+        //injector.mapSingletonOf(IImageLoadService, LocalImageLoadService);
+        injector.mapSingletonOf(IImageLoadService, GoogleImageLoadService);
 
         commandMap.mapEvent(ApplicationEvent.START_UP, StartupCommand, ApplicationEvent, true);
         commandMap.mapEvent(ImageLoadEvent.IMAGE_LIST_LOADED, ImagesLoadedCommand, ImageLoadEvent, false);
+        commandMap.mapEvent(ImageLoadEvent.LOAD_IMAGE, LoadImageCommand, ImageLoadEvent, false);
 
         //start
         dispatchEvent(new ApplicationEvent(ApplicationEvent.START_UP));

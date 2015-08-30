@@ -7,9 +7,9 @@ public class ApplicationEvent extends Event
     public static const START_UP :String = "START_UP";
     public static const STATE_CHANGED :String = "STATE_CHANGED";
 
-    public function ApplicationEvent(type:String, bubbles:Boolean = false, cancelable:Boolean = false)
+    public function ApplicationEvent(type:String)
     {
-        super(type, bubbles, cancelable);
+        super(type);
     }
 }
 }

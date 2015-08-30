@@ -10,6 +10,7 @@ public class ImagesLoadedCommand extends Command
 {
     [Inject]
     public var model : ApplicationModel;
+
     override public function execute():void
     {
        //trace("images loaded");
