@@ -28,8 +28,8 @@ public class ApplicationContext extends Context
         mediatorMap.mapView(ApplicationView, ApplicationViewMediator);
 
         injector.mapSingleton(ApplicationModel);
-        //injector.mapSingletonOf(IImageLoadService, LocalImageLoadService);
-        injector.mapSingletonOf(IImageLoadService, GoogleImageLoadService);
+        injector.mapSingletonOf(IImageLoadService, LocalImageLoadService);
+        //injector.mapSingletonOf(IImageLoadService, GoogleImageLoadService);
 
         commandMap.mapEvent(ApplicationEvent.START_UP, StartupCommand, ApplicationEvent, true);
         commandMap.mapEvent(ImageLoadEvent.IMAGE_LIST_LOADED, ImagesLoadedCommand, ImageLoadEvent, false);

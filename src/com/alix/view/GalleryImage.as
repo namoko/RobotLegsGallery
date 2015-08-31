@@ -88,6 +88,7 @@ public class GalleryImage extends UIComponent implements IGalleryImage
         var bitmap:Bitmap = loader.content as Bitmap;
         if (bitmap == null) return;
 
+        bitmap.smoothing = true;
         originalWidth = width = bitmap.bitmapData.width;
         originalHeight = height = bitmap.bitmapData.height;
 

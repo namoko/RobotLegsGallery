@@ -8,12 +8,13 @@ import flash.events.IOErrorEvent;
 import flash.events.SecurityErrorEvent;
 import flash.net.URLLoader;
 import flash.net.URLRequest;
+import flash.system.Security;
 
 import org.robotlegs.mvcs.Actor;
 
 public class LocalImageLoadService extends Actor implements IImageLoadService
 {
-    public static const MAIN_URL = "https://raw.githubusercontent.com/namoko/RobotLegsGallery/master/images/";
+    public static const MAIN_URL = "https://dl.dropboxusercontent.com/u/21908486/RobotLegs/images/";
     public static const IMAGE_LIST:String = "list.xml";
 
     [Inject]
@@ -21,6 +22,13 @@ public class LocalImageLoadService extends Actor implements IImageLoadService
 
     // local cache for random item
     private var imageStack: Vector.<String> = new <String>[];
+
+    public function LocalImageLoadService()
+    {
+        super();
+
+        Security.loadPolicyFile(MAIN_URL + "crossdomain.xml");
+    }
 
     public function getImageList():void
     {
