@@ -22,7 +22,7 @@ public class LocalImageLoadService extends Actor implements IImageLoadService
     // local cache for random item
     private var imageStack: Vector.<String> = new <String>[];
 
-    public function getImageList()
+    public function getImageList():void
     {
         var imageListUrl = MAIN_URL + IMAGE_LIST;
 
@@ -64,7 +64,7 @@ public class LocalImageLoadService extends Actor implements IImageLoadService
         dispatch(new ImageLoadEvent(ImageLoadEvent.IMAGE_LIST_LOADED));
     }
 
-    public function getNextImage()
+    public function getNextImage():void
     {
         var e:ImageLoadEvent;
 

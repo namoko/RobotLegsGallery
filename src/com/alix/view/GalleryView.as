@@ -19,9 +19,10 @@ public class GalleryView extends Canvas
     private static const MIN_ROW_HEIGHT:Number = 150;
     private static const MAX_ROW_HEIGHT:Number = 300;
 
-    private var factory : ImageFactory;
+    private var factory:ImageFactory;
 
-    private var images : Vector.<IGalleryImage>;
+    private var images:Vector.<IGalleryImage>;
+
     public function GalleryView()
     {
         factory = new GalleryImageFactory();
@@ -72,7 +73,7 @@ public class GalleryView extends Canvas
         doLayout();
     }
 
-    private function createOne(url:String) : IGalleryImage
+    private function createOne(url:String):IGalleryImage
     {
         var image:IGalleryImage = factory.create();
 
@@ -102,6 +103,7 @@ public class GalleryView extends Canvas
 
         image.hide();
     }
+
     private function onImageHide(e:ImageLoadEvent):void
     {
         var image = e.currentTarget as IGalleryImage;
@@ -120,34 +122,22 @@ public class GalleryView extends Canvas
         dispatchEvent(new ImageLoadEvent(ImageLoadEvent.LOAD_IMAGE));
     }
 
-    private function doLayout() : void
+    private function doLayout():void
     {
         var idealRowHeight = getIdealRowHeight();
 
-        var imagesInRow : Vector.<GalleryImage> = new <GalleryImage>[];
-        var rowWidth : Number = 0;
-        var positionY : Number = 0;
-        var width : Number = getAvailableWidth();
+        var imagesInRow:Vector.<GalleryImage> = new <GalleryImage>[];
+        var rowWidth:Number = 0;
+        var positionY:Number = 0;
+
         for each(var image in images)
         {
             var relativeWidth = image.calculateRelativeWidth(idealRowHeight);
-            if (imagesInRow.length >0 && rowWidth + relativeWidth + GAP > width) //row overflow
+            if (imagesInRow.length > 0 && rowWidth + relativeWidth + GAP > width) //row overflow
             {
                 //scale previous row
-                if (imagesInRow.length == 1)
-                {
-                    var first : GalleryImage = imagesInRow[0];
-                    var height = first.calculateRelativeHeight(width);
-                    first.moveAndResizeHeight(0, positionY, height);
-
-                    positionY += height + GAP;
-                }
-                else
-                {
-                    var newRowHeight:Number = resizeRowToWidth(imagesInRow, positionY);
-
-                    positionY += newRowHeight + GAP;
-                }
+                var newRowHeight:Number = resizeRowToWidth(imagesInRow, positionY);
+                positionY += newRowHeight + GAP;
 
                 //create new row
                 rowWidth = 0;
@@ -170,6 +160,18 @@ public class GalleryView extends Canvas
      */
     private function resizeRowToWidth(imagesInRow:Vector.<GalleryImage>, positionY:Number):Number
     {
+//        if (imagesInRow.length == 1)
+//        {
+//            var width:Number = getAvailableWidth();
+//
+//            var first:GalleryImage = imagesInRow[0];
+//            var height = first.calculateRelativeHeight(width);
+//            first.moveAndResizeHeight(0, positionY, height);
+//
+//            return height;
+//        }
+
+
         var idealRowHeight = getIdealRowHeight();
 
         var takenWidth = 0;

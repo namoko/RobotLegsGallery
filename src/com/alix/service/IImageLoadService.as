@@ -2,7 +2,7 @@ package com.alix.service
 {
 public interface IImageLoadService
 {
-    function getImageList();
-    function getNextImage();
+    function getImageList():void;
+    function getNextImage():void;
 }
 }

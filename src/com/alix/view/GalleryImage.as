@@ -24,6 +24,7 @@ public class GalleryImage extends UIComponent implements IGalleryImage
     public var originalHeight : int;
 
     private var loader : Loader;
+    private var hasError : Boolean;
 
     private var moveTweener:TweenLite;
     private var showTweener:TweenLite;
@@ -46,7 +47,7 @@ public class GalleryImage extends UIComponent implements IGalleryImage
         dispatchEvent(new ImageLoadEvent(ImageLoadEvent.IMAGE_HIDDEN));
     }
 
-    public function dispose()
+    public function dispose():void
     {
         if (loader == null) return;
 
@@ -76,6 +77,8 @@ public class GalleryImage extends UIComponent implements IGalleryImage
         addChild(loader);
 
         alpha = 0;
+        hasError = false;
+        super.invalidateDisplayList();
     }
 
     private function onLoadComplete(e:Event):void
@@ -97,6 +100,12 @@ public class GalleryImage extends UIComponent implements IGalleryImage
     private function onLoadError(e:Event):void
     {
         trace ("GalleryImage.onLoadError", e);
+
+        hasError = true;
+        invalidateDisplayList();
+
+        if (showTweener) showTweener.kill();
+        showTweener = TweenLite.to(this, TWEEN_TIME, {alpha:1});
     }
 
     override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void
@@ -104,9 +113,20 @@ public class GalleryImage extends UIComponent implements IGalleryImage
         super.updateDisplayList(unscaledWidth, unscaledHeight);
 
         graphics.clear();
-        graphics.beginFill(0xFFFFFF, 0);
+
+        if (!hasError) return;
+
+        graphics.lineStyle(2, 0xFF0000);
+        graphics.beginFill(0xFFFFFF, 1);
         graphics.drawRect(0, 0, unscaledWidth, unscaledHeight);
+
         graphics.endFill();
+
+        graphics.moveTo(0, 0);
+        graphics.lineTo(unscaledWidth, unscaledHeight);
+        graphics.moveTo(unscaledWidth, 0);
+        graphics.lineTo(0, unscaledHeight);
+        graphics.drawRect(0,0, unscaledWidth, unscaledHeight);
     }
 
     public function calculateRelativeWidth(height:Number): Number

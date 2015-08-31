@@ -26,7 +26,7 @@ public class GoogleImageLoadService extends Actor implements IImageLoadService
     private var loadingAll : Boolean;
     private var totalLoaded : int;
 
-    public function getImageList()
+    public function getImageList():void
     {
         loadingAll = true;
 
@@ -75,7 +75,7 @@ public class GoogleImageLoadService extends Actor implements IImageLoadService
 
             model.imageList = list;
 
-            trace("image list parsing complete "+list);
+            //trace("image list parsing complete "+list);
             dispatch(new ImageLoadEvent(ImageLoadEvent.IMAGE_LIST_LOADED));
         }
         else
@@ -93,11 +93,11 @@ public class GoogleImageLoadService extends Actor implements IImageLoadService
     {
         model.imageUrl = url;
 
-        trace("imag url loaded "+url);
+        //trace("imag url loaded "+url);
         dispatch(new ImageLoadEvent(ImageLoadEvent.IMAGE_LOAD_COMPLETE));
     }
 
-    public function getNextImage()
+    public function getNextImage():void
     {
         if (imageStack.length > 0)
         {
